@@ -1,8 +1,13 @@
 <?php
 require_once 'lib/config.php';
+require_once 'lib/pdo.php';
 require_once 'lib/recipe.php';
 
 require_once 'templates/header.php';
+
+
+$recipes = getRecipes($pdo);
+
 ?>
 
 <h1>Liste des recettes</h1>
@@ -16,5 +21,6 @@ require_once 'templates/header.php';
 
 
 <?php
+
 require_once 'templates/footer.php';
 ?>

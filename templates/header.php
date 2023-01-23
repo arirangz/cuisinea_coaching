@@ -14,6 +14,8 @@
     <title>Document</title>
 </head>
 
+
+
 <body>
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -22,8 +24,8 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="index.php" class="nav-link ">Accueil</a></li>
-                <li class="nav-item"><a href="recettes.php" class="nav-link">Recettes</a></li>
+                <li class="nav-item"><a href="index.php" class="nav-link <?php if (basename($_SERVER['SCRIPT_NAME']) === 'index.php') {echo 'active';} ?>">Accueil</a></li>
+                <li class="nav-item"><a href="recettes.php" class="nav-link <?php if (basename($_SERVER['SCRIPT_NAME']) === 'recettes.php') {echo 'active';} ?>">Recettes</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">About</a></li>
