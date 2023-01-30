@@ -14,6 +14,12 @@
     <title>Document</title>
 </head>
 
+<?php
+    $mainMenu = [
+        'index.php' => 'Accueil',
+        'recettes.php' => 'Recettes',
+    ];
+?>
 
 
 <body>
@@ -24,11 +30,9 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="index.php" class="nav-link <?php if (basename($_SERVER['SCRIPT_NAME']) === 'index.php') {echo 'active';} ?>">Accueil</a></li>
-                <li class="nav-item"><a href="recettes.php" class="nav-link <?php if (basename($_SERVER['SCRIPT_NAME']) === 'recettes.php') {echo 'active';} ?>">Recettes</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                <?php foreach ($mainMenu as $page => $titre) { ?>
+                    <li class="nav-item"><a href="<?=$page; ?>" class="nav-link <?php if (basename($_SERVER['SCRIPT_NAME']) === $page) {echo 'active';} ?>"><?=$titre; ?></a></li>
+                <?php } ?>
             </ul>
 
             <div class="col-md-3 text-end">
