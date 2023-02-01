@@ -20,17 +20,45 @@ function getRecipes($pdo, $limit = null)
 
 }
 
-function getRecipe($pdo, $id) {
+
+function getRecipeById(PDO $pdo, int $id) {
+    
     $query = $pdo->prepare("SELECT * FROM recipes WHERE id = :id");
-    $query->bindParam(':id', $id, PDO::PARAM_INT);
+    $query->bindValue(':id', $id, $pdo::PARAM_INT);
     $query->execute();
-    return $query->fetch();
+    $recipe = $query->fetch();
+
+    return $recipe;
 }
 
 
-function saveRecipe($pdo, $title, $description, $ingredients, $instructions, $image, $category_id) {
-    $query = $pdo->prepare("INSERT INTO recipes (title, description, ingredients, instructions, image, category_id) "
-    ."VALUES(:title, :description, :ingredients, :instructions, :image, :category_id)");
+function deleteRecipe(PDO $pdo, int $id) {
+    
+    $query = $pdo->prepare("DELETE FROM recipes WHERE id = :id");
+    $query->bindValue(':id', $id, $pdo::PARAM_INT);
+
+    $query->execute();
+    if ($query->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+function saveRecipe(PDO $pdo, string $title, string $description, string $ingredients, string $instructions, string|null $image, int $category_id, int $id = null) {
+    if ($id === null) {
+        $query = $pdo->prepare("INSERT INTO recipes (title, description, ingredients, instructions, image, category_id) "
+        ."VALUES(:title, :description, :ingredients, :instructions, :image, :category_id)");
+    } else {
+        $query = $pdo->prepare("UPDATE `recipes` SET `title` = :title, "
+        ."`description` = :description, `ingredients` = :ingredients, "
+        ."`instructions` = :instructions, "
+        ."image = :image, category_id = :category_id WHERE `id` = :id;");
+        
+        $query->bindValue(':id', $id, $pdo::PARAM_INT);
+    }
 
     $query->bindValue(':title', $title, $pdo::PARAM_STR);
     $query->bindValue(':description', $description, $pdo::PARAM_STR);

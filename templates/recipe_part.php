@@ -12,7 +12,9 @@
         <div class="card-body">
             <h5 class="card-title"><?= $recipe['title']; ?></h5>
             <p class="card-text"><?= $recipe['description']; ?></p>
-            <a href="recette.php?id=<?=$key; ?>" class="btn btn-primary">Voir la recette</a>
+            <a href="recette.php?id=<?=$recipe['id']; ?>" class="btn btn-primary">Voir la recette</a>
+            <a class="btn text-success btn-outline-primary" href="ajout_modification_recette.php?id=<?=$recipe['id']; ?>"><i class="bi bi-pencil-square"></i></a>
+            <a class="btn text-danger btn-outline-primary" href="supprimer_recette.php?id=<?=$recipe['id']; ?>" onclick="return confirm('Souhaitez-vous supprimer cette recette');"><i class="bi bi-trash3-fill"></i></a>
         </div>
     </div>
 </div>
